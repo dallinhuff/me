@@ -1,0 +1,13 @@
+# Languages
+- id: rust
+  display: Rust
+- id: scala
+  display: Scala
+- id: golang
+  display: Go
+- id: js
+  display: Javascript
+
+# Misc
+- id: misc
+  display: Misc.

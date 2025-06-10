@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+interface Props {
+  post: CollectionEntry<"blog">
+}
+
+const {
+  post: {
+    id,
+    data: { title, description, published },
+  },
+} = Astro.props
+---
+
+<section onclick={`window.location.href = "/blog/${id}"`}>
+  <h2>
+    <a href={"/blog/" + id}>
+      {title}
+    </a>
+  </h2>
+  <p>{description}</p>
+  <p>
+    Published {published.toISOString().split("T")[0]}
+  </p>
+</section>

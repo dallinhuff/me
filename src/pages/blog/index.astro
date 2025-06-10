@@ -1,0 +1,33 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import PostPreview from "../../components/blog/PostPreview.astro"
+
+type Post = CollectionEntry<"blog">
+
+const posts = await getCollection("blog").then((p) => p.sort(mostRecent))
+
+function mostRecent({ data: a }: Post, { data: b }: Post): number {
+  return (
+    b.published.getTime() - a.published.getTime()
+    || (b.updated?.getTime() ?? 0) - (a.updated?.getTime() || 0)
+    || a.title.localeCompare(b.title)
+  )
+}
+---
+
+<Layout title="Blog">
+  <div class="w-full flex flex-col gap-y-6">
+    Blog
+
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <PostPreview {post} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

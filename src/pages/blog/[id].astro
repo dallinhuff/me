@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "../../layouts/Layout.astro"
+import Post from "../../components/blog/Post.astro"
+
+// Generate a static page for each post in the `blog` collection at path `/blog/name-of-file`
+export async function getStaticPaths() {
+  const posts = await getCollection("blog")
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+---
+
+<Layout title={post.data.title}>
+  <Post {post} />
+</Layout>

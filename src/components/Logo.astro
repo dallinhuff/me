@@ -1,0 +1,12 @@
+---
+interface Props {
+  size?: "small" | "medium" | "large"
+}
+
+const { size = "medium" } = Astro.props
+---
+
+<a href="/" class="group inline-flex gap-x-1.5 font-semibold text-neutral-950 dark:text-neutral-50">
+  <div class="transition duration-200 ease-out group-hover:-rotate-12 group-hover:scale-110">✦</div>
+  <h1>dallin huff</h1>
+</a>

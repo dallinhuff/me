@@ -1,0 +1,72 @@
+---
+import Menu from "../components/menu/Menu.astro"
+import PageFooter from "../components/PageFooter.astro"
+import "../styles/global.css"
+
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title && `${title} |`} Dallin Huff</title>
+    <noscript>
+      <style>
+        #menu {
+          backdrop-filter: blur(16px);
+          border-bottom-width: 1px;
+          border-bottom-color: #d4d4d4;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          #menu {
+            border-bottom-color: #525252;
+          }
+        }
+      </style>
+    </noscript>
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <header id="menu" class="sticky top-0 mt-3">
+      <Menu />
+    </header>
+    <main class="w-full max-w-5xl mx-auto px-4 sm:px-8 py-4">
+      <slot />
+    </main>
+    <footer
+      class="w-full max-w-5xl mt-auto mx-auto px-4 sm:px-8 py-6 border-t border-neutral-300 dark:border-neutral-600">
+      <PageFooter />
+    </footer>
+  </body>
+</html>
+
+<script>
+  const stickyClasses = [
+    "backdrop-blur-lg",
+    "border-b",
+    "border-neutral-300",
+    "dark:border-neutral-600",
+  ]
+
+  window.addEventListener("scroll", () => {
+    const menuElement = document.getElementById("menu")
+    if (!menuElement) return
+
+    const scrollPos = window.scrollY
+    const menuMargin = Number(window.getComputedStyle(menuElement).marginTop.split("px")[0])
+
+    if (scrollPos > menuMargin) {
+      menuElement.classList.add(...stickyClasses)
+    } else {
+      menuElement.classList.remove(...stickyClasses)
+    }
+  })
+</script>

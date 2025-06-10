@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string
+  to: string
+}
+
+const { label, to } = Astro.props
+const currentRoute = Astro.url.pathname
+const isActive = to === "/" ? to === currentRoute : currentRoute.startsWith(to)
+---
+
+<li
+  class={isActive ?
+    "text-neutral-800 dark:text-neutral-300"
+  : "text-neutral-500 dark:text-neutral-400"}>
+  <a href={to}>{label}</a>
+</li>

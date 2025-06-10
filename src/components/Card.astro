@@ -1,0 +1,12 @@
+---
+interface Props {
+  class?: string
+  url?: string
+}
+
+const { class: classList = "", url } = Astro.props
+---
+
+<section class:list={[classList]}>
+  <slot />
+</section>

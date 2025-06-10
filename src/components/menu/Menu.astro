@@ -1,0 +1,17 @@
+---
+import Logo from "../Logo.astro"
+import NavLink from "./NavLink.astro"
+
+const links = [
+  { to: "/", label: "Home" },
+  { to: "/projects", label: "Projects" },
+  { to: "/blog", label: "Blog" },
+]
+---
+
+<nav class="flex justify-between items-center max-w-5xl mx-auto px-4 sm:px-8 py-4">
+  <Logo />
+  <ul class="flex items-baseline gap-x-6 text-sm tracking-wide">
+    {links.map(({ to, label }) => <NavLink {to} {label} />)}
+  </ul>
+</nav>

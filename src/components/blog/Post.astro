@@ -1,0 +1,21 @@
+---
+import { render, type CollectionEntry } from "astro:content"
+
+interface Props {
+  post: CollectionEntry<"blog">
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+
+const { title, description, published, updated, related } = post.data
+---
+
+<article>
+  <h1>{title}</h1>
+  <h4>{description}</h4>
+  <h4>Published {published.toISOString().split("T")[0]}</h4>
+  {updated && <h4>Updated {updated.toISOString().split("T")[0]}</h4>}
+  <br />
+  <Content />
+</article>
